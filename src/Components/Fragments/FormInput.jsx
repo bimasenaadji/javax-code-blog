@@ -1,24 +1,15 @@
 import Button from "../Elements/Button";
+import { addBlog } from "../../services/blog.service";
 
 const FormInput = () => {
   const handlerSubmit = (event) => {
     event.preventDefault();
-    const sendData = async () => {
-      const response = await fetch("http://localhost:3000/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: event.target.title.value,
-          description: event.target.description.value,
-        }),
-      });
-      const data = await response.json();
-      return data;
-    };
+    const data = JSON.stringify({
+      title: event.target.title.value,
+      description: event.target.description.value,
+    });
 
-    sendData();
+    addBlog(data);
     location.reload();
   };
 
